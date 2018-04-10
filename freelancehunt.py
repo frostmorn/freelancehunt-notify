@@ -1,10 +1,10 @@
 import base64
 import hmac
 import hashlib
-import curl
 import requests
-from requests.auth import HTTPBasicAuth
+
 class Freelancehunt(object):
+#   TODO: Message delivering
     # fields:
     api_token = None
     api_secret = None
@@ -23,9 +23,8 @@ class Freelancehunt(object):
         method = 'GET'
         signature = self.__sign(url, method, post_params)
         r = requests.get(url, auth=(self.api_token, signature))
-        print(r.text)
         return r.text
 
-    def get_feed(self, post_params):
+    def get_feed(self, post_params=''):
         url = 'https://api.freelancehunt.com/my/feed'
         return self.__request(url, post_params)
